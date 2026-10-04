@@ -192,12 +192,19 @@ function openSubject(n,subject){
 function openUnit(n,subject,unit){
   document.getElementById('path').textContent='Semester '+n+'  ›  '+subject+'  ›  '+unit;
   document.getElementById('modalTitle').textContent=unit;
-  document.getElementById('modalText').textContent='Material categories are ready. Your actual files will be linked here in the next stage.';
+  document.getElementById('modalText').textContent=(n===1 && subject==='Pedagogy of Science' && unit==='Unit 1')
+    ? 'Choose a material to open.'
+    : 'Material categories are ready. Your actual files will be connected as they are uploaded.';
   const list=document.getElementById('modalList'); list.innerHTML='';
   ['Gujarati Notes','Handwritten Notes','PDF Notes','Presentation','Question Paper'].forEach(item=>{
     const b=document.createElement('button');
     b.textContent='📄  '+item;
-    b.onclick=()=>alert('This section is ready for your '+item+'. We will connect the actual file after uploading it.');
+    if(n===1 && subject==='Pedagogy of Science' && unit==='Unit 1' && item==='PDF Notes'){
+      b.onclick=()=>window.open('./pedagogy%20of%20Science%20gujarati%20language.pdf','_blank');
+      b.title='Open Pedagogy of Science PDF';
+    } else {
+      b.onclick=()=>alert('This section is ready for your '+item+'. We will connect the actual file after uploading it.');
+    }
     list.appendChild(b);
   });
 }
