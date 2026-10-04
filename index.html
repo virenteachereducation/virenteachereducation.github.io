@@ -199,12 +199,34 @@ function openUnit(n,subject,unit){
   ['Gujarati Notes','Handwritten Notes','PDF Notes','Presentation','Question Paper'].forEach(item=>{
     const b=document.createElement('button');
     b.textContent='📄  '+item;
-    if(n===1 && subject==='Pedagogy of Science' && unit==='Unit 1' && item==='PDF Notes'){
-      b.onclick=()=>window.open('./pedagogy-of-science-gujarati.pdf','_blank');
-      b.title='Open Pedagogy of Science PDF';
-    } else {
-      b.onclick=()=>alert('This section is ready for your '+item+'. We will connect the actual file after uploading it.');
-    }
+   if(n===1 && subject==='Pedagogy of Science' && unit==='Unit 1' && item==='PDF Notes'){
+    b.onclick=()=>window.open('./pedagogy-of-science-gujarati.pdf','_blank');
+    b.title='Open Pedagogy of Science PDF';
+}
+else if(n===1 && subject==='Language Across the Curriculum' && unit==='Unit 1' && item==='Handwritten Notes'){
+    b.onclick=()=>{
+        const noteList=document.getElementById('modalList');
+        noteList.innerHTML='';
+
+        const notes=[
+            ['ભાષાની સંકલ્પના અને સ્વરૂપ','./unit-1-bhashani-sankalpana-notes.pdf'],
+            ['Communication - All Topics','./unit-1-Communication-All-topics-covered-handwritten.pdf'],
+            ['ગૃહભાષા અને પ્રમાણિત ભાષા','./unit-1-ghrubhasha-Ane-pramanitbhasha-handwritten.pdf'],
+            ['NEP 2020 - ત્રિભાષા સૂત્ર','./unit-1-NEP-2020-Tri-bhashasutra-handwritten.pdf']
+        ];
+
+        notes.forEach(note=>{
+            const nb=document.createElement('button');
+            nb.textContent='📄 '+note[0];
+            nb.onclick=()=>window.open(note[1],'_blank');
+            noteList.appendChild(nb);
+        });
+    };
+    b.title='Open Language Across the Curriculum Unit 1 Handwritten Notes';
+}
+else {
+    b.onclick=()=>alert('This section is ready for your '+item+'. We will connect the actual file after uploading it.');
+}
     list.appendChild(b);
   });
 }
